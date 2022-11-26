@@ -9,11 +9,11 @@ git reset --hard origin/master
 
 # Install modules
 r10k puppetfile install \
-  --puppetfile="${REPO_ROOT}/puppet/Puppetfile" \
+  --puppetfile="${REPO_ROOT}/Puppetfile" \
   --moduledir=/etc/puppetlabs/code/modules
 
 # Run Puppet
 /opt/puppetlabs/bin/puppet apply \
   --config "${REPO_ROOT}/puppet/puppet.conf" \
-  --modulepath "/etc/puppetlabs/code/modules:${REPO_ROOT}/puppet/site" \
-  "${REPO_ROOT}/puppet/site.pp"
+  --modulepath "/etc/puppetlabs/code/modules:${REPO_ROOT}/site" \
+  "${REPO_ROOT}/site.pp"
