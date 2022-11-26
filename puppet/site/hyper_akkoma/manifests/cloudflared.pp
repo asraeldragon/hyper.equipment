@@ -11,6 +11,7 @@ class hyper_akkoma::cloudflared {
     notify_update => true,
     repos         => 'main',
     key           => {
+      'id' => '254B391D8CACCBF8',
       'source' => 'https://pkg.cloudflare.com/cloudflare-main.gpg',
     },
   }

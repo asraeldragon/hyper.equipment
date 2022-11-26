@@ -5,6 +5,7 @@ class basic::tailscale {
     notify_update => true,
     repos         => 'main',
     key           => {
+      'id' => '458CA832957F5868',
       'source' => 'https://pkgs.tailscale.com/stable/ubuntu/focal.gpg',
     },
   }
