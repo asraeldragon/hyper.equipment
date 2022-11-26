@@ -44,3 +44,7 @@ mod 'logrotate',
 mod 'ssh',
   :git => 'https://github.com/saz/puppet-ssh.git',
   :tag => 'v10.0.0'
+
+  mod 'concat',
+    :git => 'https://github.com/puppetlabs/puppetlabs-concat.git',
+    :tag => 'v7.3.0'
