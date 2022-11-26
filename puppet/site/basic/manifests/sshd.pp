@@ -16,7 +16,7 @@ class basic::sshd {
     ensure => present,
     user_home_dir => '/root',
     options => {
-      '*' => {
+      'Host *' => {
         'IdentitiesOnly' => 'Yes',
         'StrictHostKeyChecking' => 'No',
       },
