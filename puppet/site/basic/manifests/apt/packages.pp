@@ -19,7 +19,8 @@ class basic::apt::packages {
   }
 
   # Post-prepare packages that should be on everything
-  package {['screen', 'mosh', 'fish-shell']:
+  package {['screen', 'et', 'fish-shell']:
     ensure => latest,
   }
+
 }

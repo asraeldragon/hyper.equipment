@@ -20,6 +20,7 @@ class basic::apt::config {
   }
 
   apt::ppa { 'ppa:fish-shell/release-3': }
+  apt::ppa { 'ppa:jgmath2000/et': }
 
   # Update Apt sources once a week, randomly
   $weekday = fqdn_rand(7)

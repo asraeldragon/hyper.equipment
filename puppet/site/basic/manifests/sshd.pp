@@ -1,4 +1,5 @@
 class basic::sshd {
+  $ssh_server_port = 59365
   class { 'ssh::server':
     storeconfigs_enabled => false,
     options => {
@@ -8,8 +9,15 @@ class basic::sshd {
       'AllowAgentForwarding' => 'no',
       'AllowTcpForwarding' => 'no',
       'PubkeyAuthentication' => 'yes',
-      'Port' => [59365],
+      'Port' => [$ssh_server_port],
     },
+  }
+
+  ufw_rule { 'allow ssh':
+    ensure => present,
+    action => 'allow',
+    direction => 'in',
+    to_ports_app => $ssh_server_port,
   }
 
   ::ssh::client::config::user { 'root':

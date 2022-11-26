@@ -4,13 +4,6 @@ class basic::ufw {
     purge_unmanaged_routes => true,
   }
 
-  ufw_rule { 'allow ssh':
-    ensure => present,
-    action => 'allow',
-    direction => 'in',
-    to_ports_app => 'OpenSSH',
-  }
-
   ufw_rule { 'allow mosh':
     ensure => present,
     action => 'allow',
