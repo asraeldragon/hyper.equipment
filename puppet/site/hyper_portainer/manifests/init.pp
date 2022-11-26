@@ -1,0 +1,3 @@
+class hyper_portainer {
+
+}
