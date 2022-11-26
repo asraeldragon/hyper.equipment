@@ -46,4 +46,16 @@ class basic::sshd {
       },
     },
   }
+
+  # Set up ET for better connections
+  package { 'et':
+    ensure => latest,
+  }
+
+  ufw_rule { 'allow et':
+    ensure => present,
+    action => 'allow',
+    direction => 'in',
+    to_ports_app => 2022,
+  }
 }

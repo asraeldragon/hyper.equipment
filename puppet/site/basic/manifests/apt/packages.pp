@@ -19,8 +19,7 @@ class basic::apt::packages {
   }
 
   # Post-prepare packages that should be on everything
-  package {['screen', 'et', 'fish']:
+  package {['screen', 'fish']:
     ensure => latest,
   }
-
 }
