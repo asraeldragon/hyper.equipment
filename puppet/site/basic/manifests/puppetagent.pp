@@ -1,5 +1,5 @@
 class basic::puppetagent (
-  String $server_url,
+  # String $server_url, # not using server
   Boolean $auto_puppet = true,
   Boolean $debug_puppet = false,
   String $log_location = '/var/log/puppet_agent.log',
