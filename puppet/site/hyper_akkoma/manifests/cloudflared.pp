@@ -10,7 +10,7 @@ class hyper_akkoma::cloudflared {
     * => $facts['os']['family'] ? {
       'RedHat' => {
         ensure   => installed,
-        source   => 'https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm'
+        source   => 'https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm',
         provider => 'rpm',
       },
       'Debian' => {
