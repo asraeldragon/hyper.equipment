@@ -1,6 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 REPO_ROOT="$(dirname -- "$(dirname -- "$( readlink -f -- "${0}"; )")")"
+cd "$REPO_ROOT"
 
 # Update Git repo
 git fetch origin
