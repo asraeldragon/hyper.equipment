@@ -48,3 +48,7 @@ mod 'ssh',
   mod 'concat',
     :git => 'https://github.com/puppetlabs/puppetlabs-concat.git',
     :tag => 'v7.3.0'
+
+mod 'ufw',
+  :git => 'https://github.com/kogitoapp/puppet-ufw',
+  :tag => '1.0.3'

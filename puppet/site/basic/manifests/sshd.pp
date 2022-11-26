@@ -8,6 +8,7 @@ class basic::sshd {
       'AllowAgentForwarding' => 'no',
       'AllowTcpForwarding' => 'no',
       'PubkeyAuthentication' => 'yes',
+      'Port' => [59365],
     },
   }
 

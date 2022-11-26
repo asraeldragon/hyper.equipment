@@ -13,6 +13,7 @@ class basic (
     }
     'Debian', 'Ubuntu': {
       class { 'basic::apt': }
+      class { 'basic::ufw': }
     }
     default:            {}
   }
