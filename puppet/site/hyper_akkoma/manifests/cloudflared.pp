@@ -6,22 +6,17 @@ class hyper_akkoma::cloudflared {
   #   to_ports_app => 'https',
   # }
 
+  apt::source { 'cloudflare':
+    location      => 'https://pkg.cloudflare.com/cloudflared',
+    notify_update => true,
+    repos         => 'main',
+    key           => {
+      'source' => 'https://pkg.cloudflare.com/cloudflare-main.gpg',
+    },
+  }
+
   package { 'cloudflared':
-    * => $facts['os']['family'] ? {
-      'RedHat' => {
-        ensure   => installed,
-        source   => 'https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-x86_64.rpm',
-        provider => 'rpm',
-      },
-      'Debian' => {
-        ensure   => installed,
-        source   => 'https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb',
-        provider => 'apt',
-      },
-      default  => {
-        ensure   => installed,
-      }
-    }
+    ensure => installed,
   }
 
   # This module doesn't install the service, since it needs a secret key and I don't have encryption configured.
