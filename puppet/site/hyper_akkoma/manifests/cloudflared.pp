@@ -16,7 +16,7 @@ class hyper_akkoma::cloudflared {
       'Debian' => {
         ensure   => installed,
         source   => 'https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb',
-        provider => 'dpkg',
+        provider => 'apt',
       },
       default  => {
         ensure   => installed,
