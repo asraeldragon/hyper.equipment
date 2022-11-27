@@ -55,10 +55,7 @@ class hyper_docker (
         true    => present,
         default => absent,
       },
-      image            => $use_registry ? {
-        true    => [ $registry_url, 'jwilder', 'nginx-proxy:alpine' ].join('/'),
-        default => [ 'jwilder', 'nginx-proxy:alpine' ].join('/'),
-      },
+      image            => 'jwilder/nginx-proxy:alpine',
       ports            => ['80:80', '443:443'],
       net              => 'nginxproxy_dmz',
       extra_parameters => [ '--restart=always', '--log-driver=none' ],
