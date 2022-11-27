@@ -102,6 +102,6 @@ define composeapp::app (
       # Mount["${storageroot}/${resource_title}"],
       Vcsrepo["${composeroot}/${resource_title}"]
     ],
-    notify        => Docker::Run['nginxproxy'],
+    # notify        => Docker::Run['nginxproxy'],
   }
 }
