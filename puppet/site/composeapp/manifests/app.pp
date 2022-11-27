@@ -34,7 +34,7 @@ define composeapp::app (
     source   => $url,
     revision => $revision,
     user     => 'root',
-    require  => File["/root/.ssh/puppet_${resource_title}_key"],
+    # require  => File["/root/.ssh/puppet_${resource_title}_key"],_key
     notify   => Docker_compose[$resource_title],
   } ->
 
