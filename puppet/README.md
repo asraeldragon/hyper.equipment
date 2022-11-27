@@ -5,6 +5,6 @@ sudo apt update
 sudo apt install puppet-agent r10k
 
 ( get a copy of this repo and CD into it, into puppet dir )
-sudo r10k puppetfile install --puppetfile=Puppetfile --moduledir=/etc/puppetlabs/code/modules
+sudo r10k puppetfile install -v --puppetfile=Puppetfile --moduledir=/etc/puppetlabs/code/modules
 
 sudo /opt/puppetlabs/bin/puppet apply --config puppet.conf --modulepath /etc/puppetlabs/code/modules:site site.pp

@@ -1,6 +1,8 @@
 class role::everything {
   # Break out into actual roles here later.
-  class { 'hyper_docker': }
+  class { 'hyper_docker':
+    nginxproxy_default_host => 'hyper.equipment',
+  }
 
   class { 'hyper_akkoma': }
   class { 'hyper_portainer': }
