@@ -5,10 +5,6 @@ class hyper_docker (
     docker_users => ['asrael'],
   }
 
-  class { 'docker::compose':
-    ensure => present,
-  }
-
   # composeapp stuff
   $run_nginxproxy = true
   $composeroot = '/opt/compose'
