@@ -81,7 +81,7 @@ class hyper_docker (
   Docker::Registry <| |> -> Docker::Run <| |>
 
   # Try to keep the nginxproxy container from crashing due to the containers not being up.
-  Docker_compose <| |> -> Docker::Run['nginxproxy']
+  # Docker_compose <| |> -> Docker::Run['nginxproxy']
 
   Docker_network['nginxproxy_dmz'] -> Docker::Run['nginxproxy']
 
