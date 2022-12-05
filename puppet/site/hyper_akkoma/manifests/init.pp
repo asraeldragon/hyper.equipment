@@ -8,7 +8,7 @@ class hyper_akkoma {
     group => 'akkoma',
   }
 
-  $akkoma_uid = 115
+  $akkoma_uid = 998
   user { 'akkoma':
     ensure => present,
     uid => $akkoma_uid,
