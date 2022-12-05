@@ -14,7 +14,7 @@ class hyper_akkoma {
     uid => $akkoma_uid,
     gid => $akkoma_uid,
     expiry => absent,
-    home => '/opt/compose/akkoma',
+    home => '/home/akkoma',
     managehome => false,
     password => '!',
     purge_ssh_keys => true,
