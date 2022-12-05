@@ -26,7 +26,7 @@ class hyper_akkoma {
     gid => $akkoma_uid,
     members => ['akkoma', 'asrael'],
     system => true,
-  } -> User['akkoma'] -> Composeapp::app['akkoma']
+  } -> User['akkoma'] -> Composeapp::App['akkoma']
 
   # First run resources
 }
