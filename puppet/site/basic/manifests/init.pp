@@ -30,6 +30,7 @@ class basic (
   class{ 'os_hardening':
     * => {
       enable_log_martians => false,
+      manage_system_users => false, # Attempts to redeclare users we already declare elsewhere. Annoyingly. We don't have hiera to manage this so ignore it.
     } + $os_hardening_overrides,
   }
 
