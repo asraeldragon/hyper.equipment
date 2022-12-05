@@ -12,7 +12,7 @@ class hyper_akkoma {
   user { 'akkoma':
     ensure => present,
     uid => $akkoma_uid,
-    gid => $akkoma_uid
+    gid => $akkoma_uid,
     expiry => absent,
     home => '/opt/compose/akkoma',
     managehome => false,
