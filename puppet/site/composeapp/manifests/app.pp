@@ -1,5 +1,7 @@
 define composeapp::app (
   Pattern[/\A(git|http).+/] $url,
+  String $owner                 = 'root',
+  String $group                 = 'root',
   String $revision              = 'master',
   Optional[Hash] $cron_config   = undef,
   # String $mountdevice         = hiera('composedevice'),
@@ -21,9 +23,9 @@ define composeapp::app (
   file { "${composeroot}/${resource_title}":
     * => {
       ensure => directory,
-      owner  => 'root',
-      group  => 'root',
-      mode   => '0770',
+      owner  => $owner,
+      group  => $group,
+      mode   => '2770',
     } + $root_options
   } ->
 
@@ -33,7 +35,7 @@ define composeapp::app (
     provider => 'git',
     source   => $url,
     revision => $revision,
-    user     => 'root',
+    user     => $owner,
     # require  => File["/root/.ssh/puppet_${resource_title}_key"],_key
     notify   => Docker_compose[$resource_title],
   } ->
@@ -41,9 +43,9 @@ define composeapp::app (
   file { "${composeroot}/${resource_title}/volumes":
     * => {
       ensure => directory,
-      owner  => 'root',
-      group  => 'root',
-      mode   => '0770',
+      owner  => $owner,
+      group  => $group,
+      mode   => '2770',
     } + $volumes_options
   }
 
@@ -54,7 +56,7 @@ define composeapp::app (
       $cronhash = {
         ensure   => present,
         command  => "${composeroot}/${resource_title}/backup.sh",
-        user     => 'root',
+        user     => $user,
         month    => absent,
         monthday => absent,
         weekday  => absent,
