@@ -81,7 +81,7 @@ class hyper_calckey {
   }
 
   # Run compose
-  docker_compose { 'calckey'
+  docker_compose { 'calckey':
     ensure        => present,
     compose_files => [$composefile],
     # require       => [
