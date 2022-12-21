@@ -71,7 +71,7 @@ class hyper_calckey {
       POSTGRES_PASSWORD=calckey
       POSTGRES_USER=calckey
       POSTGRES_DB=calckey
-      | HERE,
+      | HERE
     ;
     $composefile:
       ensure => file,
