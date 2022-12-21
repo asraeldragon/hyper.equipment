@@ -1,6 +1,4 @@
 class hyper_calckey {
-  class { 'hyper_calckey::cloudflared': }
-
   # aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
   $calckey_uid = 0
   # $calckey_uid = 997
