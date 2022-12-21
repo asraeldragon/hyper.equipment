@@ -4,7 +4,7 @@ class hyper_calckey {
   # $calckey_uid = 997
 
   $composeroot = '/opt/compose'
-  $root = "${composeroot}/${resource_title}"
+  $root = "${composeroot}/calckey"
   $reporoot = "${root}/repo"
   $volumeroot = "${root}/volumes"
   $composefile = "${root}/docker-compose.yaml"
@@ -56,7 +56,7 @@ class hyper_calckey {
     ;
     $root:;
     $volumeroot:;
-    $configdir:;
+    $configroot:;
     $configyaml:
       ensure => file,
       mode => '0660',
