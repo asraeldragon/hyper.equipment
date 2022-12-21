@@ -74,7 +74,7 @@ class hyper_calckey {
     $composefile:
       ensure => file,
       mode => '0660',
-      source => "puppet:///modules/${module_name}/docker-compose.yaml",
+      source => "puppet:///modules/${module_name}/docker-compose.yml",
     ;
   }
 
