@@ -1,0 +1,68 @@
+# Based on the file at https://codeberg.org/calckey/calckey/src/branch/develop/docker-compose.yml
+# but with the following:
+# enable ES
+#   uncomment the es depends on and entire container
+# put web container in nginxproxy_dmz network
+# move all volumes into ./volumes
+# move env into ./docker.env
+# change web service not to force open port, but expose it
+# add VIRTUAL_HOST, VIRTUAL_PORT to web
+version: "3"
+
+services:
+  web:
+    image: docker.io/thatonecalculator/calckey
+    container_name: calckey_web
+    restart: unless-stopped
+    depends_on:
+      - db
+      - redis
+      - es
+    expose:
+      - "3000"
+    networks:
+      - calcnet
+      - nginxproxy_dmz
+    environment:
+      NODE_ENV: production
+      VIRTUAL_HOST: hyper.equipment
+      VIRTUAL_PORT: 3000
+    volumes:
+      - ./files:/calckey/files
+      - ./.config:/calckey/.config:ro
+
+  redis:
+    restart: unless-stopped
+    image: docker.io/redis:7.0-alpine
+    container_name: calckey_redis
+    networks:
+      - calcnet
+    volumes:
+      - ./volumes/redis:/data
+
+  db:
+    restart: unless-stopped
+    image: docker.io/postgres:12.2-alpine
+    container_name: calckey_db
+    networks:
+      - calcnet
+    env_file:
+      - docker.env
+    volumes:
+      - ./volumes/db:/var/lib/postgresql/data
+
+es:
+  restart: unless-stopped
+  image: docker.elastic.co/elasticsearch/elasticsearch-oss:6.4.2
+  environment:
+    - "ES_JAVA_OPTS=-Xms512m -Xmx512m"
+    - "TAKE_FILE_OWNERSHIP=111"
+   networks:
+    - calcnet
+   volumes:
+    - ./volumes/elasticsearch:/usr/share/elasticsearch/data
+
+networks:
+  calcnet:
+  nginxproxy_dmz:
+    external: true

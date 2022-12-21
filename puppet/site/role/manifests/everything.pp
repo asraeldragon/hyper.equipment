@@ -4,7 +4,7 @@ class role::everything {
     nginxproxy_default_host => 'hyper.equipment',
   }
 
-  class { 'hyper_akkoma': }
+  class { 'hyper_calckey': }
   class { 'hyper_portainer': }
   class { 'hyper_postgres': }
 

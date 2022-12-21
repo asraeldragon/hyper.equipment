@@ -4,9 +4,12 @@ define composeapp::app (
   String $group                 = 'root',
   String $revision              = 'master',
   Optional[Hash] $cron_config   = undef,
-  # String $mountdevice         = hiera('composedevice'),
   Boolean $backup               = false,
   Optional[Hash] $ssl           = undef,
+
+  String $compose_file = "docker-compose.yaml",
+  Array $override_compose_files = [],
+
   Hash $manage_volumes          = {},
   Hash $root_options = {},
   Hash $volumes_options = {},
@@ -14,13 +17,13 @@ define composeapp::app (
   $resource_title = $title
   ensure_packages(['git'], {'ensure' => 'present'})
 
-  # $storageroot = hiera('storageroot')
-  # $composeroot = hiera('composeroot')
-  # $backupsroot = hiera('backupsroot')
-
   $composeroot = '/opt/compose'
+  $root = "${composeroot}/${resource_title}"
+  $reporoot = "${root}/repo"
+  $volumeroot = "${root}/volumes"
 
-  file { "${composeroot}/${resource_title}":
+
+  file { $root:
     * => {
       ensure => directory,
       owner  => $owner,
@@ -30,17 +33,16 @@ define composeapp::app (
   } ->
 
   # App composition data
-  vcsrepo { "${composeroot}/${resource_title}":
+  vcsrepo { $reporoot:
     ensure   => latest,
     provider => 'git',
     source   => $url,
     revision => $revision,
     user     => $owner,
-    # require  => File["/root/.ssh/puppet_${resource_title}_key"],_key
     notify   => Docker_compose[$resource_title],
   } ->
 
-  file { "${composeroot}/${resource_title}/volumes":
+  file { $volumeroot:
     * => {
       ensure => directory,
       owner  => $owner,
@@ -98,11 +100,11 @@ define composeapp::app (
 
   docker_compose { $resource_title:
     ensure        => present,
-    compose_files => ["${composeroot}/${resource_title}/docker-compose.yaml"],
+    compose_files => ["${reporoot}/${compose_file}"] + $override_compose_files,
     tag           => $resource_title,
     require       => [
       # Mount["${storageroot}/${resource_title}"],
-      Vcsrepo["${composeroot}/${resource_title}"]
+      Vcsrepo["${composeroot}/${resource_title}/repo"]
     ],
     # notify        => Docker::Run['nginxproxy'],
   }
