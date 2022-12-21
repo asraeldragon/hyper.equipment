@@ -17,7 +17,6 @@ class basic::tailscale {
 
   exec { 'tailscale-up':
     refreshonly => true,
-    path => '/usr/bin:/usr/local/bin:/bin:/sbin:/usr/sbin:/usr/local/sbin',
     command => 'tailscale up',
   }
 }

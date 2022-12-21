@@ -1,6 +1,8 @@
 class hyper_akkoma {
   class { 'hyper_akkoma::cloudflared': }
 
+  $akkoma_uid = 998
+
   composeapp::app { 'akkoma':
     url => 'https://akkoma.dev/AkkomaGang/akkoma.git',
     revision => 'stable',
@@ -8,7 +10,15 @@ class hyper_akkoma {
     group => 'akkoma',
   }
 
-  $akkoma_uid = 998
+  # Make sure there is a pgdata dir before launching docker compose
+  Vcsrepo['/opt/compose/akkoma'] ->
+  file { '/opt/compose/akkoma/pgdata':
+    ensure => directory,
+    owner  => $akkoma_uid,
+    group  => $akkoma_uid,
+    mode   => '2770',
+  } -> Docker_compose['akkoma']
+
   user { 'akkoma':
     ensure => present,
     uid => $akkoma_uid,
@@ -19,6 +29,7 @@ class hyper_akkoma {
     password => '!',
     purge_ssh_keys => true,
     system => true,
+    shell => '/usr/bin/fish',
   }
 
   group { 'akkoma':
@@ -27,6 +38,12 @@ class hyper_akkoma {
     members => ['akkoma', 'asrael'],
     system => true,
   } -> User['akkoma'] -> Composeapp::App['akkoma']
+
+  # Make sure akkoma is in docker group
+  exec { 'akkoma-docker-group':
+    unless => 'id -nG akkoma | grep -qw docker',
+    command => 'usermod -aG docker akkoma',
+  }
 
   # First run resources
 }

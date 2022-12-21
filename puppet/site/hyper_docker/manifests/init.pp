@@ -55,7 +55,7 @@ class hyper_docker (
       true    => present,
       default => absent,
     },
-    image            => 'jwilder/nginx-proxy:alpine',
+    image            => 'nginxproxy/nginx-proxy:alpine',
     ports            => ['80:80', '443:443'],
     net              => 'nginxproxy_dmz',
     extra_parameters => [ '--restart=always', '--log-driver=none' ],
