@@ -88,4 +88,14 @@ class hyper_calckey {
     #   Exec['calckey-docker-group'],
     # ],
   }
+
+  # Ensure that there's a very high file upload limit
+  file { '/opt/compose/nginxproxy/vhost.d/hyper.equipment':
+    ensure => file,
+    owner => 'root',
+    group => 'root',
+    mode => '0660',
+    content => "client_max_body_size 100m;\n",
+    notify => Docker::Run['nginxproxy'],
+  }
 }
