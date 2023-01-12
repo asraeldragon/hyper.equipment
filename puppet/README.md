@@ -10,11 +10,11 @@ sudo r10k puppetfile install -v --puppetfile=Puppetfile --moduledir=/etc/puppetl
 sudo /opt/puppetlabs/bin/puppet apply --config puppet.conf --modulepath /etc/puppetlabs/code/modules:site site.pp
 
 # Manual Files
-`/root/backup_credentials.fish`:
-```fish
-#!/usr/bin/env fish
-set -x AWS_ACCESS_KEY_ID "whatever"
-set -x AWS_SECRET_ACCESS_KEY "secret"
+`/root/backup_credentials.sh`:
+```sh
+#!/bin/bash
+export AWS_ACCESS_KEY_ID="whatever"
+export AWS_SECRET_ACCESS_KEY="secret"
 ```
 
 `/opt/compose/calckey/docker.env`:
@@ -25,6 +25,7 @@ POSTGRES_DB=whatever
 ```
 
 `/opt/compose/calckey/volumes/config/default.yml`:
+sourced from /root/calckey_config.yml
 ```yml
 a lot of stuff
 ```

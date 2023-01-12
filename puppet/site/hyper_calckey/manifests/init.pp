@@ -106,7 +106,7 @@ class hyper_calckey {
     owner => 'root',
     group => 'root',
     mode => '0664',
-    source => "puppet:///modules/${module_name}/calckey_backup.sh",
+    source => "puppet:///modules/${module_name}/rclone_backup.sh",
   }
 
   cron { 'calckey_backup':
