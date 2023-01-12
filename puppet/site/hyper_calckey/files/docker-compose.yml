@@ -28,8 +28,8 @@ services:
       VIRTUAL_HOST: hyper.equipment
       VIRTUAL_PORT: 3000
     volumes:
-      - ./files:/calckey/files
-      - ./.config:/calckey/.config:ro
+      - ./volumes/files:/calckey/files
+      - ./volumes/config:/calckey/.config:ro
 
   redis:
     restart: unless-stopped

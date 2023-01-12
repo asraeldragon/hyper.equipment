@@ -1,7 +1,15 @@
 #!/bin/bash
 set -euo pipefail
 REPO_ROOT="$(dirname -- "$(dirname -- "$( readlink -f -- "${0}"; )")")"
+PUPPET_DISABLEFILE="/puppet-disabled"
 cd "$REPO_ROOT"
+
+# Since we can't use puppet agent --disable, have a custom lock
+if [ -f "$PUPPET_DISABLEFILE" ]; then
+  echo "Puppet run disabled, reason:"
+  cat "$PUPPET_DISABLEFILE"
+  exit 0
+fi
 
 # Update Git repo
 git fetch origin
