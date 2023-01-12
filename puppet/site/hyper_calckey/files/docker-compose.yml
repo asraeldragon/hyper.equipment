@@ -11,7 +11,7 @@ version: "3"
 
 services:
   web:
-    image: docker.io/thatonecalculator/calckey
+    image: docker.io/thatonecalculator/calckey:v13.0.4
     container_name: calckey_web
     restart: unless-stopped
     depends_on:
