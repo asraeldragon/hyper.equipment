@@ -8,3 +8,23 @@ sudo apt install puppet-agent r10k
 sudo r10k puppetfile install -v --puppetfile=Puppetfile --moduledir=/etc/puppetlabs/code/modules
 
 sudo /opt/puppetlabs/bin/puppet apply --config puppet.conf --modulepath /etc/puppetlabs/code/modules:site site.pp
+
+# Manual Files
+`/root/backup_credentials.fish`:
+```fish
+#!/usr/bin/env fish
+set -x AWS_ACCESS_KEY_ID "whatever"
+set -x AWS_SECRET_ACCESS_KEY "secret"
+```
+
+`/opt/compose/calckey/docker.env`:
+```sh
+POSTGRES_PASSWORD=whatever
+POSTGRES_USER=whatever
+POSTGRES_DB=whatever
+```
+
+`/opt/compose/calckey/volumes/config/default.yml`:
+```yml
+a lot of stuff
+```

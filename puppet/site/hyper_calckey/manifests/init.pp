@@ -74,7 +74,7 @@ class hyper_calckey {
     $composefile:
       ensure => file,
       mode => '0660',
-      source => "puppet:///modules/${module_name}/docker-compose.yml",
+      source => "puppet:///modules/${module_name}/docker-compose.yaml",
     ;
   }
 
@@ -97,5 +97,26 @@ class hyper_calckey {
     mode => '0660',
     content => "client_max_body_size 100m;\n",
     notify => Docker::Run['nginxproxy'],
+  }
+
+  # Backups
+  $backup_script_location = '/root/calckey_backup.sh'
+  file { $backup_script_location:
+    ensure => file,
+    owner => 'root',
+    group => 'root',
+    mode => '0664',
+    source => "puppet:///modules/${module_name}/calckey_backup.sh",
+  }
+
+  cron { 'calckey_backup':
+    ensure   => present,
+    command  => "/bin/bash ${backup_script_location}",
+    user     => 'root',
+    month    => absent,
+    monthday => absent,
+    weekday  => absent,
+    hour     => 0,
+    minute   => absent,
   }
 }

@@ -1,11 +1,12 @@
 class hyper_docker (
   Optional[String] $nginxproxy_default_host = undef,
 ) {
+  # Setup Docker, to start with. This has a hardcoded user, should be removed at some point.
   class { 'docker':
     docker_users => ['asrael'],
   }
 
-  # composeapp stuff
+  # Stuff for composeapp setup -- set up nginxproxy to handle all local apps.
   $run_nginxproxy = true
   $composeroot = '/opt/compose'
   class {'docker::compose':
@@ -71,6 +72,18 @@ class hyper_docker (
       "${composeroot}/nginxproxy/vhost.d:/etc/nginx/vhost.d",
     ],
     require          => File["${composeroot}/nginxproxy/special.d.conf"],
+  }
+
+  # Automatically prune dangling junk once per day to keep disk space down a bit
+  cron { 'docker_prune':
+    ensure   => present,
+    command  => 'docker system prune --all -f --volumes',
+    user     => 'root',
+    month    => absent,
+    monthday => absent,
+    weekday  => absent,
+    hour     => 0,
+    minute   => absent,
   }
 
   # Explicit relationships
