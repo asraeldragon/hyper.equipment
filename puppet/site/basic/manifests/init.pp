@@ -18,6 +18,8 @@ class basic (
     default:            {}
   }
 
+  class { 'rclone': ensure => 'latest', }
+
   class { 'basic::ntp': }
   class { 'basic::sshd': }
 
