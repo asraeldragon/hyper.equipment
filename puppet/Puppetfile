@@ -55,4 +55,4 @@ mod 'ufw',
 
 mod 'smarteon-rclone',
   :git => 'https://github.com/Smarteon/puppet-rclone.git',
-  :tag => '0.0.2'
+  :tag => 'v0.0.2'
