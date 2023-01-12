@@ -16,4 +16,4 @@ r10k puppetfile install \
 /opt/puppetlabs/bin/puppet apply \
   --config "${REPO_ROOT}/puppet/puppet.conf" \
   --modulepath "/etc/puppetlabs/code/modules:${REPO_ROOT}/site" \
-  "${REPO_ROOT}/site.pp"
+  "${REPO_ROOT}/site.pp" "$@"
