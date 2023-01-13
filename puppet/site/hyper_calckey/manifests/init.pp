@@ -133,7 +133,7 @@ class hyper_calckey {
     group => 'root',
     mode => '0660',
     notify => Docker::Run['nginxproxy'],
-    content => @("HERE"/L)
+    content => @(HERE/L)
     location = /.well-known/webfinger {
       if ( $query_string ~ "(.*)resource=acct(:|%3A)((?:@|%40)?[^@%]+)(@|%40)([^&]+)(.*)" ) {
         return 302 https://hyper.equipment/.well-known/webfinger?$1resource=acct$2$3$4hyper.equipment$6;
