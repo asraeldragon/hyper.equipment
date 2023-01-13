@@ -18,12 +18,12 @@ git submodule update --init --recursive
 
 # Install modules
 r10k puppetfile install \
-  --puppetfile="${REPO_ROOT}/Puppetfile" \
+  --puppetfile="${REPO_ROOT}/puppet/Puppetfile" \
   --moduledir=/etc/puppetlabs/code/modules
 
 # Run Puppet
 /opt/puppetlabs/bin/puppet apply \
   --config "${REPO_ROOT}/puppet/puppet.conf" \
   --hiera_config "${REPO_ROOT}/puppet/hiera.yaml" \
-  --modulepath "/etc/puppetlabs/code/modules:${REPO_ROOT}/site" \
-  "${REPO_ROOT}/site.pp" "$@"
+  --modulepath "/etc/puppetlabs/code/modules:${REPO_ROOT}/puppet/site" \
+  "${REPO_ROOT}/puppet/site.pp" "$@"

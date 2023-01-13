@@ -72,7 +72,7 @@ class hyper_calckey {
           port => 5432,
           db => $postgres_db,
           user => $postgres_user,
-          pass => $postgres_password,
+          pass => $postgres_pass,
         },
         redis => {
           host => redis,
@@ -89,7 +89,7 @@ class hyper_calckey {
       ensure => file,
       mode => '0660',
       content => @("HERE"/L)
-      POSTGRES_PASSWORD=${postgres_password}
+      POSTGRES_PASSWORD=${postgres_pass}
       POSTGRES_USER=${postgres_user}
       POSTGRES_DB=${postgres_db}
       | HERE
