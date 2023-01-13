@@ -15,14 +15,4 @@ sudo cp keys/public_key.pkcs7.pem /etc/puppetlabs/puppet/keys/puppet_eyaml.crt
 rm -rf ./keys
 
 ## apply code
-sudo bash /root/hyper.equipment/puppet/scripts/run-puppet.sh
-
-
-
-# Manual Files
-
-`/opt/compose/calckey/volumes/config/default.yml`:
-sourced from /root/calckey_config.yml
-```yml
-a lot of stuff
-```
+sudo bash /<repo location>/puppet/scripts/run-puppet.sh

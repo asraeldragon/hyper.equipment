@@ -14,6 +14,10 @@ services:
     image: docker.io/thatonecalculator/calckey:v13.0.4
     container_name: calckey_web
     restart: unless-stopped
+    deploy:
+      update_config:
+        parallelism: 2
+        order: start-first
     depends_on:
       - db
       - redis
@@ -25,7 +29,7 @@ services:
       - nginxproxy_dmz
     environment:
       NODE_ENV: production
-      VIRTUAL_HOST: hyper.equipment
+      VIRTUAL_HOST: hyper.equipment,multi.equipment
       VIRTUAL_PORT: 3000
     volumes:
       - ./volumes/files:/calckey/files
