@@ -73,11 +73,11 @@ class hyper_calckey {
         redis => {
           host => redis,
           port => 6379,
-        }
+        },
         elasticsearch => {
           host => es,
           port => 9200,
-        }
+        },
         id => aid,
       }),
     ;
