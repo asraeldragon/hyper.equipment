@@ -3,6 +3,10 @@ class hyper_calckey {
   $calckey_uid = 0
   # $calckey_uid = 997
 
+  $postgres_db = lookup('calckey::postgres::db'),
+  $postgres_user = lookup('calckey::postgres::user'),
+  $postgres_pass = lookup('calckey::postgres::password'),
+
   $composeroot = '/opt/compose'
   $root = "${composeroot}/calckey"
   $reporoot = "${root}/repo"
@@ -66,9 +70,9 @@ class hyper_calckey {
         db => {
           host => db,
           port => 5432,
-          db => lookup('calckey::postgres::db'),
-          user => lookup('calckey::postgres::user'),
-          pass => lookup('calckey::postgres::password'),
+          db => $postgres_db,
+          user => $postgres_user,
+          pass => $postgres_password,
         },
         redis => {
           host => redis,
@@ -85,9 +89,9 @@ class hyper_calckey {
       ensure => file,
       mode => '0660',
       content => @("HERE"/L)
-      POSTGRES_PASSWORD=${lookup('calckey::postgres::password')}
-      POSTGRES_USER=${lookup('calckey::postgres::user')}
-      POSTGRES_DB=${lookup('calckey::postgres::db')}
+      POSTGRES_PASSWORD=${postgres_password}
+      POSTGRES_USER=${postgres_user}
+      POSTGRES_DB=${postgres_db}
       | HERE
     ;
     $composefile:
