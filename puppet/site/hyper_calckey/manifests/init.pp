@@ -3,9 +3,9 @@ class hyper_calckey {
   $calckey_uid = 0
   # $calckey_uid = 997
 
-  $postgres_db = lookup('calckey::postgres::db'),
-  $postgres_user = lookup('calckey::postgres::user'),
-  $postgres_pass = lookup('calckey::postgres::password'),
+  $postgres_db = lookup('calckey::postgres::db')
+  $postgres_user = lookup('calckey::postgres::user')
+  $postgres_pass = lookup('calckey::postgres::password')
 
   $composeroot = '/opt/compose'
   $root = "${composeroot}/calckey"
