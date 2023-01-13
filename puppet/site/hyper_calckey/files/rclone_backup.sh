@@ -9,15 +9,6 @@ DOCKERENV_FILE="$COMPOSE_DIR/docker.env"
 CONFIG_VOLUME="$COMPOSE_DIR/volumes/config"
 PG_SERVICE_NAME=db
 
-# rclone auth
-AUTH_FILE=~/backup_credentials.sh
-if [ ! -f "$AUTH_FILE" ]; then
-  echo "Credentials file missing! $AUTH_FILE"
-  exit 1
-fi
-
-source "$AUTH_FILE"
-
 # rclone parameters
 DEST_BACKEND=encrypted
 DEST_SUBDIR=hyper.equipment-backups/backups

@@ -1,0 +1,29 @@
+---
+# Hiera 5 Global configuration file
+version: 5
+
+:defaults:
+  datadir: hieradata
+  data_hash: yaml_data
+
+:hierarchy:
+- name: Hiera Config
+  path: "default_merge_strategy.yaml"
+
+- name: All Data, Encryption Supported
+  paths:
+  - "nodes/%{trusted.certname}.yaml"
+  # - "cloud/%{facts.cloud}/location/%{facts.location}/role/%{facts.role}.yaml"
+  # # - "location/%{facts.location}/role/%{facts.role}.yaml"
+  # - "cloud/%{facts.cloud}/role/%{facts.role}.yaml"
+  # - "cloud/%{facts.cloud}/location/%{facts.location}.yaml"
+  # - "role/%{facts.role}.yaml"
+  # - "location/%{facts.location}.yaml"
+  # - "cloud/%{facts.cloud}.yaml"
+  # - "os/%{facts.os.family}.yaml"
+  - "common.yaml"
+
+  lookup_key: eyaml_lookup_key
+  options: # Hiera-eyaml specific options (the paths of the keypair used for encryption)
+    pkcs7_private_key: /etc/puppetlabs/puppet/keys/puppet_eyaml.key
+    pkcs7_public_key:  /etc/puppetlabs/puppet/keys/puppet_eyaml.crt

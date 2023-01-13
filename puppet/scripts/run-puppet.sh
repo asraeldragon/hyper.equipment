@@ -23,5 +23,6 @@ r10k puppetfile install \
 # Run Puppet
 /opt/puppetlabs/bin/puppet apply \
   --config "${REPO_ROOT}/puppet/puppet.conf" \
+  --hiera_config "${REPO_ROOT}/puppet/hiera.yaml" \
   --modulepath "/etc/puppetlabs/code/modules:${REPO_ROOT}/site" \
   "${REPO_ROOT}/site.pp" "$@"

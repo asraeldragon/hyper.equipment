@@ -60,3 +60,11 @@ mod 'smarteon-rclone',
   mod 'puppet-archive',
     :git => 'https://github.com/voxpupuli/puppet-archive.git',
     :tag => 'v6.1.0'
+
+mod 'attachmentgenie-grafana_agent',
+  :git => 'https://github.com/attachmentgenie/attachmentgenie-grafana_agent.git',
+  :tag => 'v1.0.1'
+
+mod 'hash2stuff',
+  :git => 'https://github.com/mmckinst/puppet-hash2stuff.git',
+  :ref => '1.2.1'

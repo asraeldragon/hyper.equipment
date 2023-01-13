@@ -60,15 +60,34 @@ class hyper_calckey {
     $configyaml:
       ensure => file,
       mode => '0660',
-      source => 'file:///root/calckey_config.yml', # actually sensitive so it gets pulled from elsewhere in a manual step
+      content => hash2yaml({
+        url => 'https://hyper.equipment/',
+        port => 3000,
+        db => {
+          host => db,
+          port => 5432,
+          db => lookup('calckey::postgres::db'),
+          user => lookup('calckey::postgres::user'),
+          pass => lookup('calckey::postgres::password'),
+        },
+        redis => {
+          host => redis,
+          port => 6379,
+        }
+        elasticsearch => {
+          host => es,
+          port => 9200,
+        }
+        id => aid,
+      }),
     ;
     $composeenv:
       ensure => file,
       mode => '0660',
       content => @("HERE"/L)
-      POSTGRES_PASSWORD=calckey
-      POSTGRES_USER=calckey
-      POSTGRES_DB=calckey
+      POSTGRES_PASSWORD=${lookup('calckey::postgres::password')}
+      POSTGRES_USER=${lookup('calckey::postgres::user')}
+      POSTGRES_DB=${lookup('calckey::postgres::db')}
       | HERE
     ;
     $composefile:
@@ -107,6 +126,36 @@ class hyper_calckey {
     group => 'root',
     mode => '0664',
     source => "puppet:///modules/${module_name}/rclone_backup.sh",
+  }
+
+  # would use rclone::config::s3, but it limits the options we can set, so no thanks
+  rclone::config { 'wasabi':
+    ensure  => present,
+    type    => 's3',
+    os_user => 'root',
+    options => {
+      env_auth => 'false',
+      endpoint => 's3.us-east-2.wasabisys.com',
+      bucket_acl => 'private',
+      disable_checksum => 'true',
+      no_check_bucket => 'true',
+      acl => 'private',
+      access_key_id => lookup('rclone::config::s3::access_key_id'),
+      secret_access_key => lookup('rclone::config::s3::secret_access_key'),
+    },
+  }
+
+  rclone::config { 'encrypted':
+    ensure  => present,
+    type    => 'crypt',
+    os_user => 'root',
+    options => {
+      remote => 'wasabi:',
+      filename_encryption => 'off',
+      directory_name_encryption => 'false',
+      password => lookup('rclone::config::encrypted::password'),
+      password2 => lookup('rclone::config::encrypted::password2'),
+    },
   }
 
   cron { 'calckey_backup':
