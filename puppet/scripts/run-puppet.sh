@@ -1,6 +1,6 @@
 #!/bin/bash
 set -euo pipefail
-REPO_ROOT="$(git -C "$( readlink -f -- "${0}"; )" rev-parse --show-toplevel)"
+REPO_ROOT="$(git -C "$(dirname -- "$( readlink -f -- "${0}"; )")" rev-parse --show-toplevel)"
 PUPPET_DISABLEFILE="/puppet-disabled"
 cd "$REPO_ROOT"
 
