@@ -49,6 +49,7 @@ class hyper_calckey {
   #   ]
   # }
 
+
   # Setup file structure
   file {
     default:
@@ -101,6 +102,7 @@ class hyper_calckey {
     ;
   }
 
+
   # Run compose
   docker_compose { 'calckey':
     ensure        => present,
@@ -118,9 +120,29 @@ class hyper_calckey {
     owner => 'root',
     group => 'root',
     mode => '0660',
-    content => "client_max_body_size 100m;\n",
     notify => Docker::Run['nginxproxy'],
+    content => @("HERE"/L)
+    client_max_body_size 100m;
+    | HERE
   }
+
+  # Redirect alias domains to the main site
+  file { '/opt/compose/nginxproxy/vhost.d/multi.equipment_location':
+    ensure => file,
+    owner => 'root',
+    group => 'root',
+    mode => '0660',
+    notify => Docker::Run['nginxproxy'],
+    content => @("HERE"/L)
+    location = /.well-known/webfinger {
+      if ( $query_string ~ "(.*)resource=acct(:|%3A)((?:@|%40)?[^@%]+)(@|%40)([^&]+)(.*)" ) {
+        return 302 https://hyper.equipment/.well-known/webfinger?$1resource=acct$2$3$4hyper.equipment$6;
+      }
+    }
+    | HERE
+  }
+
+
 
   # Backups
   $backup_script_location = '/root/calckey_backup.sh'
@@ -172,4 +194,8 @@ class hyper_calckey {
     hour     => 0,
     minute   => absent,
   }
+
+
+  # Monitoring
+
 }
