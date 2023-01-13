@@ -14,6 +14,7 @@ fi
 # Update Git repo
 git fetch origin
 git reset --hard origin/master
+git submodule update --init --recursive
 
 # Install modules
 r10k puppetfile install \
