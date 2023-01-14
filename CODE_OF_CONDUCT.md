@@ -14,8 +14,8 @@ For quick reference on how to report bad behavior or request a content takedown,
 
 | Role | Name | Address |
 |---|---|---|
-| Admin | Asrael | @asrael@hyper.equipment |
-| Moderator | Jake | @owlsky@hyper.equipment |
+| Admin | Asrael | [@asrael@hyper.equipment](https://hyper.equipment/@asrael) |
+| Moderator | Jake | [@owlsky@hyper.equipment](https://hyper.equipment/@owlsky) |
 # Rules
 
 ## Account Policies
