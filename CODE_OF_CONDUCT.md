@@ -35,6 +35,10 @@ For quick reference on how to report bad behavior or request a content takedown,
 
 Click the “Hide Content” button at the bottom of the post field (oval with a slash through it), then type a Content Warning into the “Comments” field above your post. It can be short, something like “Lewd hyper multi furry”. Use any and all applicable warnings/tags.
 
+*To set your media to be NSFW by default:*
+
+Go to Settings → Drive → Mark as NSFW by default.
+
 Here are the kinds of content you must add a content warning for:
 
 ### NSFW
