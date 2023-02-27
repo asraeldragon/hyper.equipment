@@ -16,7 +16,7 @@ DEST_SUBDIR=hyper.equipment-backups/backups
 TEMP_DIR="$(mktemp -d)"
 
 echo "Dumping Postgres..."
-time docker-compose --project-directory "$COMPOSE_DIR" exec --user postgres "$PG_SERVICE_NAME" \
+time docker-compose --project-directory "$COMPOSE_DIR" exec -T --user postgres "$PG_SERVICE_NAME" \
   pg_dump -U calckey | gzip > "$TEMP_DIR/backup.psql"
 
 echo "Copying files..."
