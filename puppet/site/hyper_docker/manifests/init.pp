@@ -82,8 +82,8 @@ class hyper_docker (
     month    => absent,
     monthday => absent,
     weekday  => absent,
-    hour     => 0,
-    minute   => absent,
+    hour     => 1,
+    minute   => 0,
   }
 
   # Explicit relationships

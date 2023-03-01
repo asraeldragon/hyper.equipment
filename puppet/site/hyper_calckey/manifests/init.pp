@@ -192,7 +192,7 @@ class hyper_calckey {
     monthday => absent,
     weekday  => absent,
     hour     => 0,
-    minute   => absent,
+    minute   => 0,
   }
 
 
