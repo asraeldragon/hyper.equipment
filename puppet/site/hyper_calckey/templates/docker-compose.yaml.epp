@@ -1,3 +1,6 @@
+<%- |
+  String  $virtual_host,
+| -%>
 # Based on the file at https://codeberg.org/calckey/calckey/src/branch/develop/docker-compose.yml
 # but with the following:
 # enable ES
@@ -29,7 +32,7 @@ services:
       - nginxproxy_dmz
     environment:
       NODE_ENV: production
-      VIRTUAL_HOST: hyper.equipment,multi.equipment
+      VIRTUAL_HOST: <%= $virtual_host %>
       VIRTUAL_PORT: 3000
     volumes:
       - ./volumes/files:/calckey/files
