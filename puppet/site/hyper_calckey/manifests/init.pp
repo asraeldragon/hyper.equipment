@@ -2,7 +2,6 @@ define hyper_calckey (
   String $main_domain = $title,
   Array $additional_domains = [],
   Boolean $use_backups = false,
-  String $dirname = 'calckey',
 
   # Sucky variable to allow different deploys
   String $compose_name = 'calckey',
@@ -17,7 +16,7 @@ define hyper_calckey (
   $postgres_pass = lookup('calckey::postgres::password')
 
   $composeroot = '/opt/compose'
-  $root = "${composeroot}/${dirname}"
+  $root = "${composeroot}/${compose_name}"
   $reporoot = "${root}/repo"
   $volumeroot = "${root}/volumes"
   $composefile = "${root}/docker-compose.yaml"
