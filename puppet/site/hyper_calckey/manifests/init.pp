@@ -108,7 +108,7 @@ define hyper_calckey (
       ensure  => file,
       mode    => '0660',
       content => epp("${module_name}/docker-compose.yaml.epp", {
-        'virtual_host' => join(concat($main_domain, $additional_domains), ',')
+        'virtual_host' => join(concat([$main_domain], $additional_domains), ',')
       }),
     ;
   }
