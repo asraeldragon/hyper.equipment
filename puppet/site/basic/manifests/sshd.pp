@@ -7,7 +7,7 @@ class basic::sshd {
       'PasswordAuthentication' => 'no',
       'PermitRootLogin' => 'no',
       'AllowAgentForwarding' => 'no',
-      'AllowTcpForwarding' => 'no',
+      'AllowTcpForwarding' => 'yes',
       'PubkeyAuthentication' => 'yes',
       'Port' => [$ssh_server_port],
     },
