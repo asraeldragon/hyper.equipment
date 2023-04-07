@@ -1,5 +1,6 @@
 <%- |
   String  $virtual_host,
+  String  $container_prefix,
 | -%>
 # Based on the file at https://codeberg.org/calckey/calckey/src/branch/develop/docker-compose.yml
 # but with the following:
@@ -15,7 +16,7 @@ version: "3"
 services:
   web:
     image: docker.io/thatonecalculator/calckey:v13.0.4
-    container_name: calckey_web
+    container_name: <%= $container_prefix %>_web
     restart: unless-stopped
     deploy:
       update_config:
@@ -41,7 +42,7 @@ services:
   redis:
     restart: unless-stopped
     image: docker.io/redis:7.0-alpine
-    container_name: calckey_redis
+    container_name: <%= $container_prefix %>_redis
     networks:
       - calcnet
     volumes:
@@ -50,7 +51,7 @@ services:
   db:
     restart: unless-stopped
     image: docker.io/postgres:12.2-alpine
-    container_name: calckey_db
+    container_name: <%= $container_prefix %>_db
     networks:
       - calcnet
     env_file:
