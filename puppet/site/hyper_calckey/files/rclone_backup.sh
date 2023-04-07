@@ -17,7 +17,7 @@ TEMP_DIR="$(mktemp -d)"
 
 echo "Dumping Postgres..."
 time docker-compose --project-directory "$COMPOSE_DIR" exec -T --user postgres "$PG_SERVICE_NAME" \
-  pg_dump -U calckey | gzip > "$TEMP_DIR/backup.psql"
+  pg_dump -U calckey | gzip > "$TEMP_DIR/backup.psql.gz"
 
 echo "Copying files..."
 cp -a "$DOCKERENV_FILE" "$TEMP_DIR/"
