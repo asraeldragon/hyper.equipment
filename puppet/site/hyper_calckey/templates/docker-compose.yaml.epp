@@ -30,19 +30,19 @@ services:
       - es
     expose:
       - "3000"
-    <% if ! $is_production { -%>
+    <%- if ! $is_production { -%>
     ports:
       - "127.0.0.1:3000:3000"
-    <% } -%>
+    <%- } -%>
     networks:
       - calcnet
       - nginxproxy_dmz
     environment:
       NODE_ENV: production
-      <% if $is_production { -%>
+      <%- if $is_production { -%>
       VIRTUAL_HOST: <%= $virtual_host %>
       VIRTUAL_PORT: 3000
-      <% } -%>
+      <%- } -%>
     volumes:
       - ./volumes/files:/calckey/files
       - ./volumes/config:/calckey/.config:ro
