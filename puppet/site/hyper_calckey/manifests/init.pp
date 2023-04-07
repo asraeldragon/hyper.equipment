@@ -1,10 +1,11 @@
 define hyper_calckey (
+  String $version,
   String $main_domain = $title,
   Array $additional_domains = [],
 
   # Should only be true for one instance of this, until I genericize resource names and paths.
   # but realistically I only need this for my main env so whatever
-  Boolean $use_backups = false,
+  Boolean $is_production = false,
 
   # Sucky variable to allow different deploys
   # Should be updated to use main domain at some point.
@@ -113,6 +114,8 @@ define hyper_calckey (
       content => epp("${module_name}/docker-compose.yaml.epp", {
         virtual_host     => join(concat([$main_domain], $additional_domains), ','),
         container_prefix => $compose_name,
+        container_tag    => $version,
+        is_production    => $is_production,
       }),
     ;
   }
@@ -159,7 +162,7 @@ define hyper_calckey (
     }
   }
 
-  if( $use_backups ) {
+  if( $is_production ) {
     # Backups
     $backup_script_location = '/root/calckey_backup.sh'
     file { $backup_script_location:

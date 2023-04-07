@@ -6,12 +6,14 @@ class role::everything {
 
   # Main instance
   hyper_calckey { 'hyper.equipment':
+    version            => 'v13.0.4',
     additional_domains => ['multi.equipment'],
-    use_backups        => true,
+    is_production      => true,
   }
 
   # Testing instance
   hyper_calckey { 'double.hyper.equipment':
+    version      => 'v13.0.4',
     compose_name => 'double_calckey',
   }
 

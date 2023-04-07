@@ -1,6 +1,8 @@
 <%- |
   String  $virtual_host,
   String  $container_prefix,
+  String  $container_tag,
+  Boolean $is_production = false,
 | -%>
 # Based on the file at https://codeberg.org/calckey/calckey/src/branch/develop/docker-compose.yml
 # but with the following:
@@ -15,7 +17,7 @@ version: "3"
 
 services:
   web:
-    image: docker.io/thatonecalculator/calckey:v13.0.4
+    image: docker.io/thatonecalculator/calckey:<%= $container_tag %>
     container_name: <%= $container_prefix %>_web
     restart: unless-stopped
     deploy:
@@ -28,13 +30,19 @@ services:
       - es
     expose:
       - "3000"
+    <% if ! $is_production { -%>
+    ports:
+      - "127.0.0.1:3000:3000"
+    <% } -%>
     networks:
       - calcnet
       - nginxproxy_dmz
     environment:
       NODE_ENV: production
+      <% if $is_production { -%>
       VIRTUAL_HOST: <%= $virtual_host %>
       VIRTUAL_PORT: 3000
+      <% } -%>
     volumes:
       - ./volumes/files:/calckey/files
       - ./volumes/config:/calckey/.config:ro
