@@ -20,6 +20,9 @@ class role::everything {
   class { 'hyper_portainer': }
   class { 'hyper_postgres': }
 
+  # Change memory allocation values for ElasticSearch containers
+  sysctl { 'vm.max_map_count': value => '262144' }
+
   # Add IPv4 forwarding if this host has Docker.
   $has_docker = true
   class { 'basic':
