@@ -45,7 +45,7 @@ if [ "$times" == 30 ]; then
 fi
 
 echo "Uploading backup to clean Postgres..."
-time gunzip "${TEMP_DIR}/backup.psql.gz" | docker-compose --project-directory "$COMPOSE_TWO" exec -T --user postgres "$PG_SERVICE_NAME" psql -U calckey
+time gunzip -c "${TEMP_DIR}/backup.psql.gz" | docker-compose --project-directory "$COMPOSE_TWO" exec -T --user postgres "$PG_SERVICE_NAME" psql -U calckey > /dev/null
 
 echo "Starting Calckey..."
 docker-compose --project-directory "$COMPOSE_TWO" up -d
