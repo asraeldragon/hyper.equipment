@@ -1,5 +1,6 @@
 <%- |
   String  $virtual_host,
+  String  $container_repo,
   String  $container_prefix,
   String  $container_tag,
   Boolean $is_production = false,
@@ -17,7 +18,7 @@ version: "3"
 
 services:
   web:
-    image: docker.io/thatonecalculator/calckey:<%= $container_tag %>
+    image: <%= $container_repo %>:<%= $container_tag %>
     container_name: <%= $container_prefix %>_web
     restart: unless-stopped
     deploy:

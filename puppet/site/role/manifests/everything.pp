@@ -6,15 +6,17 @@ class role::everything {
 
   # Main instance
   hyper_calckey { 'hyper.equipment':
-    version            => 'v13.1.4.1',
+    container_repo     => 'asraeldragon/calckey_backup',
+    version            => 'v13.1.4.1.backup',
     additional_domains => ['multi.equipment'],
     is_production      => true,
   }
 
   # Testing instance
   hyper_calckey { 'double.hyper.equipment':
-    version      => 'v13.1.4.1',
-    compose_name => 'double_calckey',
+    container_repo => 'asraeldragon/calckey_backup',
+    version        => 'v13.1.4.1.backup',
+    compose_name   => 'double_calckey',
   }
 
   class { 'hyper_portainer': }
@@ -26,8 +28,8 @@ class role::everything {
   # Add IPv4 forwarding if this host has Docker.
   $has_docker = true
   class { 'basic':
-    os_hardening_overrides =>{
-        enable_ipv4_forwarding => true,
+    os_hardening_overrides => {
+      enable_ipv4_forwarding => true,
     },
   }
 }

@@ -1,5 +1,6 @@
 define hyper_calckey (
   String $version,
+  String $container_repo = 'docker.io/thatonecalculator/calckey',
   String $main_domain = $title,
   Array $additional_domains = [],
 
@@ -113,6 +114,7 @@ define hyper_calckey (
       mode    => '0660',
       content => epp("${module_name}/docker-compose.yaml.epp", {
         virtual_host     => join(concat([$main_domain], $additional_domains), ','),
+        container_repo   => $container_repo,
         container_prefix => $compose_name,
         container_tag    => $version,
         is_production    => $is_production,
