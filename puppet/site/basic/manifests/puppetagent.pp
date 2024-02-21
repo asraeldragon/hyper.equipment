@@ -42,6 +42,11 @@ class basic::puppetagent (
     source => 'git@github.com:asraeldragon/hyper.equipment.git',
   }
 
+  # Ensure that cron is installed before making any crons
+  package { 'cron':
+    ensure  => latest,
+  } -> Cron <| |>
+
   $offset = fqdn_rand(60)
   cron { 'run_puppet':
     ensure   => $auto_puppet ? {
