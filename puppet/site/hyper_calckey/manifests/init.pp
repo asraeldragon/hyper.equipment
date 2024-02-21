@@ -122,18 +122,6 @@ define hyper_calckey (
     ;
   }
 
-
-  # Run compose
-  docker_compose { $compose_name:
-    ensure        => present,
-    compose_files => [$composefile],
-    # require       => [
-    #   User['calckey'],
-    #   Group['calckey'],
-    #   Exec['calckey-docker-group'],
-    # ],
-  }
-
   # Ensure that there's a very high file upload limit
   file { "/opt/compose/nginxproxy/vhost.d/${main_domain}":
     ensure  => file,
@@ -165,6 +153,17 @@ define hyper_calckey (
   }
 
   if( $is_production ) {
+    # Run compose
+    docker_compose { $compose_name:
+      ensure        => present,
+      compose_files => [$composefile],
+      # require       => [
+      #   User['calckey'],
+      #   Group['calckey'],
+      #   Exec['calckey-docker-group'],
+      # ],
+    }
+
     # Backups
     $backup_script_location = '/root/calckey_backup.sh'
     file { $backup_script_location:
