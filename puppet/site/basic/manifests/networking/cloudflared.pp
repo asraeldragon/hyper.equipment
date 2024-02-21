@@ -6,6 +6,6 @@ class basic::networking::cloudflared (
     image            => 'cloudflare/cloudflared:latest',
     net              => 'nginxproxy_dmz',
     extra_parameters => [ '--restart=always', '--log-driver=none' ],
-    command          => "--no-autoupdate run --token ${token}",
+    command          => "tunnel --no-autoupdate run --token ${token}",
   }
 }

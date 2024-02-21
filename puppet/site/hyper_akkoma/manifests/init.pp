@@ -1,6 +1,4 @@
 class hyper_akkoma {
-  class { 'hyper_akkoma::cloudflared': }
-
   $akkoma_uid = 998
 
   composeapp::app { 'akkoma':
