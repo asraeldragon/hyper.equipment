@@ -1,5 +1,6 @@
 define hyper_calckey (
   String $version,
+  String $cloudflare_token = "",
   String $container_repo = 'docker.io/thatonecalculator/calckey',
   String $main_domain = $title,
   Array $additional_domains = [],
@@ -13,6 +14,7 @@ define hyper_calckey (
   String $compose_name = 'calckey',
 
   Integer $uid = 0,
+
 ) {
   # aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
   # $uid = 997
@@ -118,6 +120,7 @@ define hyper_calckey (
         container_prefix => $compose_name,
         container_tag    => $version,
         is_production    => $is_production,
+        cloudflare_token => $cloudflare_token,
       }),
     ;
   }

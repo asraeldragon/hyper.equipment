@@ -4,6 +4,7 @@
   String  $container_prefix,
   String  $container_tag,
   Boolean $is_production = false,
+  String  $cloudflare_token = "",
 | -%>
 # Based on the file at https://codeberg.org/calckey/calckey/src/branch/develop/docker-compose.yml
 # but with the following:
@@ -78,6 +79,20 @@ services:
       - calcnet
     volumes:
       - ./volumes/elasticsearch:/usr/share/elasticsearch/data
+
+  <%- if $cloudflare_token != "" { -%>
+  tunnel:
+    restart: unless-stopped
+    image: cloudflare/cloudflared:latest
+    networks:
+      - nginxproxy_dmz
+    command:
+      - tunnel
+      - --no-autoupdate
+      - run
+      - --token
+      - <%= $cloudflare_token %>
+  <%- } -%>
 
 networks:
   calcnet:

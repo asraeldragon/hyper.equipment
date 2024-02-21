@@ -10,6 +10,7 @@ class role::everything {
     version            => 'v13.1.4.1.backup',
     additional_domains => ['multi.equipment'],
     is_production      => true,
+    cloudflare_token   => lookup('basic::networking::cloudflared::token'),
   }
 
   # Testing instance

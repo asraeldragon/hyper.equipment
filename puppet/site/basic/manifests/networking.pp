@@ -7,5 +7,4 @@ class basic::networking {
   class { 'basic::networking::firewall': }
   class { 'basic::networking::proxy': }
   class { 'basic::networking::ssl': }
-  class { 'basic::networking::cloudflared': }
 }
