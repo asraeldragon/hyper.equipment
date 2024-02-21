@@ -214,12 +214,19 @@ define hyper_calckey (
       month    => absent,
       monthday => absent,
       weekday  => absent,
-      hour     => 0,
+      hour     => 8,
+      minute   => 0,
+    }
+
+    cron { 'calckey_restart':
+      ensure   => present,
+      command  => "docker-compose --project-directory ${root} restart web",
+      user     => 'root',
+      month    => absent,
+      monthday => absent,
+      weekday  => absent,
+      hour     => 7,
       minute   => 0,
     }
   }
-
-
-  # Monitoring
-
 }
