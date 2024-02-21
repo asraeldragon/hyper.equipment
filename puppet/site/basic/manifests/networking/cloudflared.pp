@@ -1,7 +1,7 @@
 class basic::networking::cloudflared (
   String $token,
 ) {
-  docker::run { 'nginxproxy':
+  docker::run { 'cloudflared':
     ensure           => present,
     image            => 'cloudflare/cloudflared:latest',
     net              => 'nginxproxy_dmz',
