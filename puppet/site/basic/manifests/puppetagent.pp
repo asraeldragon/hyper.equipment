@@ -62,6 +62,20 @@ class basic::puppetagent (
     minute   => $offset,
   }
 
+  cron { 'clean_puppet_reports':
+    ensure   => $auto_puppet ? {
+      true    => present,
+      default => absent,
+    },
+    command  => '/usr/bin/find /var/lib/puppet/reports -type f -mtime +2 -delete',
+    user     => 'root',
+    month    => absent,
+    monthday => absent,
+    weekday  => absent,
+    hour     => 0,
+    minute   => 0,
+  }
+
   logrotate::rule { 'puppet_agent':
     path         => $log_location,
     rotate       => 3,
